@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EmprestimoApp.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h4>@ViewData["Title"]</h4>
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Novo Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaldoAtual)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.SaldoAtual)
+            </td>
+            <td>
+              <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+              <a class="btn btn-outline-primary" asp-controller="Emprestimo" asp-route-id="@item.Id" asp-action="Create">Pedir Empréstimo</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

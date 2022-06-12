@@ -1,0 +1,41 @@
+﻿@model EmprestimoApp.Models.Emprestimo
+
+@{
+    ViewData["Title"] = "Novo Empréstimo";
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="hidden" asp-for="ClienteId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ValorEmprestimo" class="control-label"></label>
+                <input asp-for="ValorEmprestimo" class="form-control" />
+                <span asp-validation-for="ValorEmprestimo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantidadeParcelas" class="control-label"></label>
+                <input asp-for="QuantidadeParcelas" class="form-control" />
+                <span asp-validation-for="QuantidadeParcelas" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="ClienteId" class="control-label"></label>
+            <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
+            </div>*@
+            <div class="form-group" style="margin-top:10px">
+                <input type="submit" value="Criar" class="btn btn-info" />
+                <a class="btn btn-primary" asp-action="Index">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
