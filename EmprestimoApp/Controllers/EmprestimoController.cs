@@ -34,15 +34,18 @@ namespace EmprestimoApp.Controllers
             if (!ModelState.IsValid) return View(emprestimo);
             emprestimo.Id = 0;
 
-
             var calc = emprestimo.ValorTotal(emprestimo.ValorEmprestimo);
             emprestimo.valorTotal = calc;
 
             var parcelas = emprestimo.ValorParcela(calc, emprestimo.QuantidadeParcelas);
             emprestimo.ValorDaParcela = parcelas;
 
-           var saldoatual = emprestimo.Cliente.SaldoAtual;
+            var cliente = _context.Clientes.FirstOrDefault(x => x.Id == emprestimo.ClienteId);
 
+            emprestimo.Cliente = cliente;
+
+            emprestimo.Cliente.SaldoAtual += emprestimo.ValorEmprestimo;
+            
             _context.Emprestimos.Add(emprestimo);
             _context.SaveChanges();
 

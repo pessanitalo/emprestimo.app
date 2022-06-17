@@ -9,5 +9,12 @@ namespace EmprestimoApp.DataContext
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Emprestimo>()
+                .HasOne(x => x.Cliente)
+                .WithOne(x => x.Emprestimo);
+        }
+
     }
 }
